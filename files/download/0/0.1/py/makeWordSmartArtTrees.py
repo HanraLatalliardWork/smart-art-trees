@@ -34,14 +34,14 @@ class Tkinter(root):
             TT['bg']=self.universalBackground
             LabelTitle=Label(TT,text="A new version is avaidable",anchor=center)
             LabelTitle.pack(side=TOP,fill=X)
-            SubTitle1=Label(TT,text=f"Version {self.latestVersion} is available."anchor=center)
+            SubTitle1=Label(TT,text=f"Version {self.latestVersion} is available.",anchor=center)
             SubTitle1.pack(side=TOP,fill=X)
             SubTitle2=Label(TT,text=f"Your current version is {self.version}",anchor=center)
             SubTitle2.pack(side=TOP,fill=X)
             FrameButton=Frame(TT,bg=self.universalBackground,borderwidth=1,border=FLAT)
             FrameButton.pack(side=TOP,fill=X)
-            DownloadButton=Button(FrameButton,text="Download new version",command=)
+            DownloadButton=Button(FrameButton,text="Download new version",command=newVersion())
 RI=root()
-RI.latestVersion="1.0.0.0"
-if RI.version<RI.latestVersion:
+print(RI.latestVersion)
+if float(RI.version)<float(RI.latestVersion):
     Tkinter.window.notifyUpdate(RI)
