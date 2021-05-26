@@ -3,7 +3,7 @@ from webbrowser import open_new_tab
 import os, requests
 class root:
     def __init__(self):
-        self.version="0.0.0.1"
+        self.version="0.1"
         self.latestVersion=get.version(self)
         self.homeWebsite="https://hanralatalliardwork.github.io/smart-art-trees/"
         self.fileSection="files/program/img/"
@@ -42,5 +42,6 @@ class Tkinter(root):
             FrameButton.pack(side=TOP,fill=X)
             DownloadButton=Button(FrameButton,text="Download new version",command=)
 RI=root()
+RI.latestVersion="1.0.0.0"
 if RI.version<RI.latestVersion:
     Tkinter.window.notifyUpdate(RI)
