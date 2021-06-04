@@ -56,14 +56,13 @@ class root:
         self.MSVersionsDict={f"{self.MS} Powerpoint":self.yes,f"{self.MS} Excel":self.yes,f"{self.MS} Word":self.yes,f"{self.MS} Outlook":self.yes,f"{self.MS} Sharepoint":self.maibye,f"{self.MS} Publisher":self.no,f"{self.MS} Access":self.no,f"{self.MS} Forms":self.no,f"{self.MS} OneNote":self.no,f"{self.MS} Tasks":self.no,f"{self.MS} Sway":self.no,f"{self.MS} Skype":self.no,f"{self.MS} Power Automate":self.no,f"{self.MS} OneDrive":self.no,f"{self.MS} Office":self.no,f"{self.MS} Parental control":self.no,f"{self.MS} Calendar":self.no,f"{self.MS} Bing":self.no,f"{self.MS} MSN":self.no,f"{self.MS} Rewards":self.no,f"{self.MS} Teams":self.no}
     def pause():
         pause=input("Press enter to continue ...")
-    def unstring(rule1="=",rule2="\"",string="",take=1):
+    def unstring(rule="=",string="",take=1):
         try:
-            print("in try:")
             try:
-                d=string.split(rule1)[take]
+                d=string.split(rule)[take]
                 print(f"""
 ........................................................\n........................................................\n........................................................\n........................................................\n........................................................\n........................................................
-d='{string}'.split(rule1='{rule1}'[take='{take}'])='{d}', type('{d}')={type(d)}""")
+d='{string}'.split(rule='{rule}'[take='{take}'])='{d}', type('{d}')={type(d)}""")
                 try:
                     print("in try:try:")
                     return float(d)
@@ -79,14 +78,12 @@ d='{string}'.split(rule1='{rule1}'[take='{take}'])='{d}', type('{d}')={type(d)}"
                             pass
                         else:
                             try:
-                                print(f"in try:except:try:,i='{i}',type('{i}')={type(i)}")
-                                print(f"int(i)={int(i)}")
-                                print(f"i={i}")
+                                print(f"in try:except:try:,i='{i}'")
                                 version+=int(i)
                                 print(f"version='{version}', type('{version}')={type(version)}")
                             except:
                                 print("in try:except:except:")
-                                print(f"i=\\'{i}\\'")
+                                print(f"i='{i}'")
                                 pass
                     try:
                         print("try:except:try:")
@@ -101,7 +98,7 @@ d='{string}'.split(rule1='{rule1}'[take='{take}'])='{d}', type('{d}')={type(d)}"
                         return d
             except:
                 print("in except, line 80")
-                f=string.split(rule2)[take]
+                f=string.split(rule)[take]
                 print(f"f='{f}'")
                 word=""
                 A=0
@@ -214,11 +211,11 @@ class boot(root):
             
             try:
                 print("try:\n####################################################################\na")
-                RI.a=fileVersion=boot.unstring(rule1="=",rule2="\"",string=fileContent[0],take=1)
+                RI.a=fileVersion=boot.unstring(rule="=",string=fileContent[0],take=1)
                 print("####################################################################\nb")
-                RI.b=fileAuthor=boot.unstring(rule1="=",rule2="\'",string=fileContent[1],take=1)
+                RI.b=fileAuthor=boot.unstring(rule="=",string=fileContent[1],take=1)
                 print("####################################################################\nc")
-                RI.c=fileName=boot.unstring(rule1="=",rule2="\'",string=fileContent[2],take=1)
+                RI.c=fileName=boot.unstring(rule="=",string=fileContent[2],take=1)
                 print("####################################################################\nresult")
                 print(f"\n\n\n\na={RI.a},b={RI.b},c={RI.c}\n\n\n\n")
                 print(f"\n\n\n\nfileVersion={fileVersion}\nfileAuthor={fileAuthor}\nfileName={fileName}")
