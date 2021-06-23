@@ -10,6 +10,7 @@ print("class root")
 class root:
     def __init__(self,home,version,author,fileName):
         print("initialising root")
+        self.versions_all=[]
         #---------------------------------KILL ALL--------------------------------
         self.kill=False
         #---------------------------------LINKS-----------------------------------
@@ -17,6 +18,7 @@ class root:
         self.fileSection="files/program/"
         self.imageFolder="img/"
         self.downloadSection="files/download/"
+        self.helpPage="help/"
         #---------------------------------STATUS----------------------------------
         self.isOnline=boot.get.online.isActive()
         #---------------------------------VERSIONS--------------------------------
@@ -54,6 +56,7 @@ class root:
         self.maibye="maibye"
         self.no="impossible"
         self.MSVersionsDict={f"{self.MS} Powerpoint":self.yes,f"{self.MS} Excel":self.yes,f"{self.MS} Word":self.yes,f"{self.MS} Outlook":self.yes,f"{self.MS} Sharepoint":self.maibye,f"{self.MS} Publisher":self.no,f"{self.MS} Access":self.no,f"{self.MS} Forms":self.no,f"{self.MS} OneNote":self.no,f"{self.MS} Tasks":self.no,f"{self.MS} Sway":self.no,f"{self.MS} Skype":self.no,f"{self.MS} Power Automate":self.no,f"{self.MS} OneDrive":self.no,f"{self.MS} Office":self.no,f"{self.MS} Parental control":self.no,f"{self.MS} Calendar":self.no,f"{self.MS} Bing":self.no,f"{self.MS} MSN":self.no,f"{self.MS} Rewards":self.no,f"{self.MS} Teams":self.no}
+        self.chosen_version=self.MSVersions[0]
     def pause():
         pause=input("Press enter to continue ...")
     def unstring(rule1="=",rule2="\"",string="",take=1):
@@ -63,27 +66,35 @@ class root:
                 d=string.split(rule1)[take]
                 print(f"""
 ........................................................\n........................................................\n........................................................\n........................................................\n........................................................\n........................................................
-d='{string}'.split(rule1='{rule1}'[take='{take}'])='{d}', type('{d}')={type(d)}""")
+d=\\'{string}\\'.split(rule1=\\'{rule1}\\'[take=\\'{take}\\'])=\\'{d}\\', type(\\'{d}\\')={type(d)}""")
                 try:
                     print("in try:try:")
+                    print(f"float(\\'{d}\\')=\\'{float(d)}\\'")
                     return float(d)
                 except:
                     print("in try:except:")
                     version=""
                     for i in d:
                         if i==".":
-                            print(f"i='{i}',version='{version}{i}'")
+                            print(f"i=\\'{i}\\',version=\\'{version}{i}\\'")
                             version+=i
                         elif i==" " or i=="\'" or i=="\"":
-                            print(f"ignored: '{i}'")
+                            print(f"ignored: \\'{i}\\'")
                             pass
                         else:
                             try:
-                                print(f"in try:except:try:,i='{i}',type('{i}')={type(i)}")
-                                print(f"int(i)={int(i)}")
-                                print(f"i={i}")
-                                version+=int(i)
-                                print(f"version='{version}', type('{version}')={type(version)}")
+                                print(f"in try:except:try:,i=\\'{i}\\',type(\\'{i}\\')={type(i)}")
+                                try:
+                                    print("in try:except:try:try:")
+                                    print(f"int(i)={int(i)}")
+                                    print(f"i={i}")
+                                    version+=int(i)
+                                except:
+                                    print("in try:except:try:except:")
+                                    print(f"type(i)={type(i)}")
+                                    print(f"i={i}")
+                                    version+=i
+                                print(f"version=\\'{version}\\', type(\\'{version}\\')={type(version)}")
                             except:
                                 print("in try:except:except:")
                                 print(f"i=\\'{i}\\'")
@@ -93,10 +104,10 @@ d='{string}'.split(rule1='{rule1}'[take='{take}'])='{d}', type('{d}')={type(d)}"
                         return float(version)
                     except:
                         print("try:except:except:")
-                        print(f"d='{d}',type('{d}')={type(d)})")
+                        print(f"d=\\'{d}\\',type(\\'{d}\\')={type(d)})")
                         for i in d.split("'"):
                             if len(i)>0:
-                                print(f"i='{i}'")
+                                print(f"i=\\'{i}\\'")
                                 return i
                         return d
             except:
@@ -221,7 +232,8 @@ class boot(root):
                 RI.c=fileName=boot.unstring(rule1="=",rule2="\'",string=fileContent[2],take=1)
                 print("####################################################################\nresult")
                 print(f"\n\n\n\na={RI.a},b={RI.b},c={RI.c}\n\n\n\n")
-                print(f"\n\n\n\nfileVersion={fileVersion}\nfileAuthor={fileAuthor}\nfileName={fileName}")
+                print(f"\n\n\n\nfileVersion={fileVersion}\ntype(fileVersion)={type(fileVersion)}\nfileAuthor={fileAuthor}\nfileName={fileName}")
+                RI.versions_all.append({"fileName":fileName,"fileVersion":fileVersion})
                 if fileAuthor==RI.author and fileName==RI.fileName:
                     print("\n\n\n\nIn if")
                     try:
@@ -550,7 +562,7 @@ class Jacques_Henri(root):
             TT.mainloop()
         def two(self):
             def helpButton():
-                print("")
+                open_new_tab(f"{self.homeWebsite}{self.fileSection}{self.helpPage}2")
             def update_options(*args):
                 e=listeCombo.get()
                 e=self.MSVersionsDict[e]
@@ -589,11 +601,20 @@ class Jacques_Henri(root):
             FrameBottomBottom.pack(side=TOP,fill=X)
             HelpButton=Button(FrameTop,text="?",command=helpButton,bg=self.universalBackground)#tutorial on how this section works
             HelpButton.pack(side=RIGHT,fill=X,padx=self.mainMenuPadX)
-            MidLabel=Label(FrameMid,text="Tree Type",bg=self.universalBackground)
+            MidLabel=Label(FrameMid,text=f"{self.MS} software",bg=self.universalBackground)
             MidLabel.pack(side=LEFT,fill=X)
             FrameDropdown=Frame(FrameMid,bg=self.universalBackground,relief=FLAT,border=0)
             FrameDropdown.pack(side=LEFT,fill=X)
             listeCombo = ttk.Combobox(FrameDropdown, values=self.MSVersions,width=100)
+            listeCombo.current(0)
+            listeCombo.pack()#fill=Y,pady=1,padx=5)
+            listeCombo.bind("<<ComboboxSelected>>",update_options)#,command=youjerk
+            MSImage=()
+            MidLabel=Label(FrameMid,text="Tree Type",bg=self.universalBackground)
+            MidLabel.pack(side=LEFT,fill=X)
+            FrameDropdownTree=Frame(FrameMid,bg=self.universalBackground,relief=FLAT,border=0)
+            FrameDropdownTree.pack(side=LEFT,fill=X)
+            listeCombo = ttk.Combobox(FrameDropdown, values=self.MSTreeType,width=100)
             listeCombo.current(0)
             listeCombo.pack()#fill=Y,pady=1,padx=5)
             listeCombo.bind("<<ComboboxSelected>>",update_options)#,command=youjerk
@@ -612,34 +633,61 @@ class Jacques_Henri(root):
             MidLabelAfter1.pack(side=LEFT,fill=X)
             GenerateButton=Button(TT,text="Generate the tree", command=tree,bg=self.universalBackground)
             GenerateButton.pack(side=TOP,fill=X,padx=self.mainMenuPadX)
+            CancelButton=Button(TT,text="Cancel", command=TT.destroy,bg=self.universalBackground)
+            CancelButton.pack(side=TOP,fill=X,padx=self.mainMenuPadX,pady=5)
             MessageLabel=Label(TT,text=self.watermark,bg=self.universalBackground,anchor="center")
             MessageLabel.pack(side=RIGHT,fill=X)
             TT.mainloop()
         def three(self):
+            def helpButton():
+                open_new_tab(f"{self.homeWebsite}{self.fileSection}{self.helpPage}3")
+            def update_options(*args):
+                self.chosen_version=listeCombo.get()
+                e=self.MSVersionsDict[self.chosen_version]
+                # print(e)
+                if e==self.no:
+                    GenerateButton.config(text=f"Download Your Macro for {self.chosen_version}")
+                    GenerateButton.config(state="disable")
+                else:
+                    GenerateButton.config(text=f"Download Your Macro for {self.chosen_version}")
+                    GenerateButton.config(state="normal")
+            def tree():
+                print("number_of_colums={e}, number_of_leaves={r}")
             TT=Tk()
             if self.displayIcon==True:
                 TT.iconbitmap(self.icon)
             TT.geometry(self.window_geometry)
             TT.minsize(self.window_size_x,self.window_size_y)
-            TT.title("Main Menu")
+            TT.title("Generate a Smart Art in Word")
             TT['bg']=self.universalBackground
-            TitleLabel=Label(TT,text="Main Menu",bg=self.universalBackground,anchor="center")
+            TitleLabel=Label(TT,text="Generate a Smart Art in Word",bg=self.universalBackground,anchor="center")
             TitleLabel.pack(side=TOP,fill=X)
-            DropDown_options=()
-            FrameMainButton=Frame(TT,bg=self.universalBackground,borderwidth=1,relief=FLAT)
-            FrameMainButton.pack(side=TOP,fill=X)
-            FrameButtonTop=Frame(FrameMainButton,bg=self.universalBackground,borderwidth=1,relief=FLAT)
-            FrameButtonTop.pack(side=TOP,fill=X)
-            DownloadButton=Button(FrameButtonTop,text="Tutorial on how to manually use Smart Art",command=TT.destroy,bg=self.universalBackground)
-            DownloadButton.pack(side=LEFT,fill=X,padx=self.mainMenuPadX)
-            DownloadButton=Button(FrameButtonTop,text="Generate a Smart Art scheme",command=TT.destroy,bg=self.universalBackground)
-            DownloadButton.pack(side=RIGHT,fill=X,padx=self.mainMenuPadX)
-            FrameButtonBottom=Frame(FrameMainButton,bg=self.universalBackground,borderwidth=1,relief=FLAT)
-            FrameButtonBottom.pack(side=TOP,fill=X)
-            DownloadButton=Button(FrameButtonBottom,text="Generate a Smart Art in word\n(i'm looking for somebody to write the VBA script)",command=TT.destroy,bg=self.universalBackground)
-            DownloadButton.pack(side=LEFT,fill=X,padx=self.mainMenuPadX)
-            ContinueButton=Button(FrameButtonBottom,text="Quit",command=TT.destroy,bg=self.universalBackground)
-            ContinueButton.pack(side=RIGHT,fill=X,padx=self.mainMenuPadX)
+            FrameMain=Frame(TT,bg=self.universalBackground,borderwidth=1,relief=FLAT)
+            FrameMain.pack(side=TOP,fill=X)
+            FrameTop=Frame(FrameMain,bg=self.universalBackground,borderwidth=1,relief=FLAT)
+            FrameTop.pack(side=TOP,fill=X)
+            FrameMid=Frame(FrameMain,bg=self.universalBackground,borderwidth=1,relief=FLAT)
+            FrameMid.pack(side=TOP,fill=X)
+            FrameBottom=Frame(FrameMain,bg=self.universalBackground,borderwidth=1,relief=FLAT)
+            FrameBottom.pack(side=TOP,fill=X)
+            FrameBottomBottom=Frame(FrameMain,bg=self.universalBackground,borderwidth=1,relief=FLAT)
+            FrameBottomBottom.pack(side=TOP,fill=X)
+            HelpButton=Button(FrameTop,text="?",command=helpButton,bg=self.universalBackground)#tutorial on how this section works
+            HelpButton.pack(side=RIGHT,fill=X,padx=self.mainMenuPadX)
+            MidLabel=Label(FrameMid,text=f"{self.MS} software:",bg=self.universalBackground)
+            MidLabel.pack(side=LEFT,fill=X)
+            FrameDropdown=Frame(FrameMid,bg=self.universalBackground,relief=FLAT,border=0)
+            FrameDropdown.pack(side=LEFT,fill=X)
+            listeCombo = ttk.Combobox(FrameDropdown, values=self.MSVersions,width=100)
+            listeCombo.current(0)
+            listeCombo.pack()#fill=Y,pady=1,padx=5)
+            listeCombo.bind("<<ComboboxSelected>>",update_options)
+            GenerateButton=Button(TT,text=f"Download Your Macro for {self.chosen_version}", command=tree,bg=self.universalBackground)
+            GenerateButton.pack(side=TOP,fill=X,padx=self.mainMenuPadX)
+            DownloadButton=Button(TT,text="How to use it?", command=tree,bg=self.universalBackground)
+            DownloadButton.pack(side=TOP,fill=X,padx=self.mainMenuPadX)
+            CancelButton=Button(TT,text="Cancel", command=TT.destroy,bg=self.universalBackground)
+            CancelButton.pack(side=TOP,fill=X,padx=self.mainMenuPadX,pady=5)
             MessageLabel=Label(TT,text=self.watermark,bg=self.universalBackground,anchor="center")
             MessageLabel.pack(side=RIGHT,fill=X)
             TT.mainloop()
@@ -673,3 +721,4 @@ if RI.kill==False:#True:
     root.pause()
     root.pause()
     root.pause()
+print(f"RI.versions_all={RI.versions_all}")
