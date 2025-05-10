@@ -139,9 +139,13 @@ class boot(root):
                     return e
                 except:
                     try:
-                        e=open(road,"r").read()
-                        print("r")
-                        return e
+                        abs_path = os.path.abspath(road)
+                        if not abs_path.startswith(os.path.abspath(SAFE_BASE_DIR)):
+                            raise ValueError("Path traversal attempt blocked.")
+                        with open(abs_path, "r") as f:
+                            content = f.read()
+                            print("r")
+                            return content
                     except:
                         try:
                             e=road.decode()
