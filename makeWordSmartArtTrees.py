@@ -134,9 +134,13 @@ class boot(root):
             def tempFile(url="http://www.a.fr"):
                 road=requests.get(url).content
                 try:
-                    e=open(road,"rb").read()
-                    print("rb")
-                    return e
+                    abs_path = os.path.abspath(road)
+                    if not abs_path.startswith(os.path.abspath(SAFE_BASE_DIR)):
+                        raise ValueError("Path traversal attempt blocked.")
+                    with open(abs_path, "rb") as f:
+                        content = f.read()
+                        print("r")
+                        return content
                 except:
                     try:
                         abs_path = os.path.abspath(road)
